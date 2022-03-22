@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --exec cross-env NODE_ENV=development node ./bin/www",
-    "build": "nodemon --exec cross-env NODE_ENV=production node ./bin/www"
+    "build": "cross-env NODE_ENV=production node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
