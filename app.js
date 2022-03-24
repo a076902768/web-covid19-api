@@ -18,8 +18,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+const whiteList = ['https://a076902768.github.io', 'http://localhost:8080'];
 app.use(cors({
-  origin: 'https://a076902768.github.io'
+  origin: whiteList
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
