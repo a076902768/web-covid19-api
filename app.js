@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+const cors = require('cors');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
@@ -17,16 +18,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// let allowCrossDomain = function (req, res, next) {
-//   console.log('test');
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-//   next();
-// }
-// app.use(allowCrossDomain)
-var cors = require('cors');
-
-app.use(cors());
+app.use(cors({
+  origin: 'https://a076902768.github.io'
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -47,9 +41,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// var cors = require('cors');
-
-// app.use(cors());
 
 module.exports = app;

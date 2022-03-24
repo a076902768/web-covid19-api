@@ -1,7 +1,13 @@
 var express = require('express');
-var request = require('request');
+const request = require('request');
+const cityList = require('../jsonData/cityList.json');
 var router = express.Router();
-/* GET users listing. */
+
+/* GET home page. */
+router.get('/', function (req, res, next) {
+  res.render('index', { title: 'Express' });
+});
+
 router.post('/data', function (req, res, next) {
   const reqBody = req.body
   const reqQuery = req.queries
@@ -34,17 +40,24 @@ router.post('/data', function (req, res, next) {
     })
   });
 });
-
 router.get('/cityList', function (req, res, next) {
-  const url = 'http://api.opencube.tw/twzipcode/get-citys';
+  res.json({
+    code: 200,
+    data: cityList
+  })
+
+});
+
+router.get('/test', function (req, res, next) {
+  const url = 'https://covid-19.nchc.org.tw/api/covid19?CK=covid-19@nchc.org.tw&querydata=5001';
 
   request(url, (err, body) => {
-
     res.json({
-      code: JSON.parse(body.body).status,
-      data: JSON.parse(body.body).data
+      code: 200,
+      data: JSON.parse(body.body)
     })
   });
 
 });
+
 module.exports = router;
