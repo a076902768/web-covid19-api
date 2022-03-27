@@ -39,7 +39,7 @@ router.post('/', function (req, res, next) {
       body.body = dataDateFilter(body.body);
     }
     for (let i = startIndex; i <= endIndex; i++) {
-      data.push(JSON.parse(body.body)[i])
+      if (JSON.parse(body.body)[i]) data.push(JSON.parse(body.body)[i])
     }
 
     res.json({
